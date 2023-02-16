@@ -2,7 +2,6 @@
 <html lang="en" dir="ltr">
 
 <head>
-
   <meta charset="utf-8">
   <title>Todo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,42 +40,45 @@
 </head>
 
 <body  class="container-fluid">
-
-  {% if messages %}
-  {% for message in messages %}
-  <div class="alert alert-info">
-    <strong>{{message}}</strong>
-  </div>
-  {% endfor %}
-  {% endif %}
-
   <center class="row">
     <h1><i>Kundalik ishlar</i></h1>
     <hr />
   </center>
-
+  
   <div class="row">
 
     <div class="col-md-8">
+      {% for i in Todo %}
       <div class="card">
-        <center><b>Title of the todo</b></center>
+        
+        <center><b>{{i.id}}.{{i.title}}</b></center>
         <hr/>
-        Todo time
+        {{i.time}}
         <hr/>
-        Todo description
+        {{i.description}}
         <hr/>
-        Todo status
+        {{i.status}}
         <br />
-        <button class="btn btn-primary" style="float: right;"><span class="glyphicon glyphicon-trash"></span><a href="#">O'chirish</a></button>
+        
+        <button class="btn btn-primary" style="float: right;"><span class="glyphicon glyphicon-trash"></span><a href="/todo_delete/{{i.id}}/">O'chirish</a></button>
+        <button class="btn btn-primary" style="background-color:rgb(255, 71, 71);"><span class="glyphicon glyphicon-pencil"></span><a href="/todo_edit/{{i.id}}/">Edit</a></button>
       </div>
+      {% endfor %}
     </div>
     <div class="col-md-1"> </div>
     <div class="col-md-3" >
+  
       <div  class="submit_form">
-      <form action="#" >
 
+      <form action="/todo/" method="post">{% csrf_token %}
         <center>
-        <button type="submit" class="btn btn-default">Topshirish</button>
+          <input type="text" name="title" placeholder="Title...">
+         <input type="text" name="d" placeholder="Description...">
+         <input type="date" name="time" placeholder="Time...">
+         <h3>Status:</h3> <input type="checkbox" name="status">
+        </center>
+        <center>
+        <button type="submit" class="btn btn-primary" style="background-color:rgb(255, 71, 71);" ><span class="glyphicon glyphicon-plus"></span>Append</button>
       </center>
       </form>
     </div>

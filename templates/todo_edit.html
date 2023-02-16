@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>todo_edit</title>
 </head>
 <body>
-$END$
+    <h1><p style="color:rgba(255, 1, 1, 0.993);">Todo ma'lumotini o'zgartirish uchun:</p></h1>
+    <br>
+    <br>
+    <form method="post">{% csrf_token %}
+        <h2>
+      <lebel>Title: </lebel>
+      <input type="text" name="title" value="{{todo.title}}">
+      <label>Time: </label>
+      <input type="date" name="time" value="{{todo.time}}">
+      <lebel>Description: </lebel>
+      <input type="text" name="description" value="{{todo.description}}">
+      <lebel>Status: </lebel>
+      {% if record.status %}
+      <input type="checkbox" name="status" checked>
+      {% else %}
+      <input type="checkbox" name="status">
+      {% endif %}
+      <button type="submit">save</button>
+    </h2>
+    </form>
+    <a href="/"><button>Back</button></a>
 </body>
 </html>
